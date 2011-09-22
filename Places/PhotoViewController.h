@@ -10,9 +10,13 @@
 
 
 @interface PhotoViewController : UIViewController <UIScrollViewDelegate> {
-    UIImageView* iv;
+    UIImage* image;
+    UIImageView* imageView;
+    UIScrollView* scrollView;
 }
 
 @property (copy) NSData* imageData;
+@property (nonatomic, retain) UIScrollView* scrollView;
+@property (nonatomic, retain) UIImage* image;
 
 @end

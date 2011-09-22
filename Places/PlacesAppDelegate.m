@@ -20,7 +20,7 @@
 {
     //views
     TopPlacesViewController* tpvc = [[TopPlacesViewController alloc] initWithTabBar];
-    PhotosAtPlaceViewController* pvc  = [[PhotosAtPlaceViewController alloc] init];   
+    PhotosAtPlaceViewController* pvc  = [[PhotosAtPlaceViewController alloc] initWithTabBar];   
     
     //View Controllers
     UINavigationController* tpnvc = [[UINavigationController alloc] initWithRootViewController:tpvc];
@@ -35,10 +35,11 @@
     
     [self.window addSubview:tbc.view];
     [self.window makeKeyAndVisible];
+    
     return YES;
 }
 
-- (void)applicationWillResignActive:(UIApplication *)application
+- (void)applicationWillResignActive:(UIApplication *)application    
 {
     /*
      Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

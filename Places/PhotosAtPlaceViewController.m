@@ -15,6 +15,15 @@
 
 @synthesize photosAtLocationArray;
 
+- (id)initWithTabBar {
+    self = [super init];
+    if (self) {
+        self.tabBarItem = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemMostRecent tag:1];
+    }
+    
+    return self;
+}
+
 
 - (void)dealloc
 {
@@ -162,6 +171,8 @@
       
     PhotoViewController* pvc = [[PhotoViewController alloc] init];
     pvc.imageData = [FlickrFetcher imageDataForPhotoWithFlickrInfo:[self.photosAtLocationArray objectAtIndex:indexPath.row] format:FlickrFetcherPhotoFormatLarge];
+    
+    pvc.title = [[self.photosAtLocationArray objectAtIndex:indexPath.row] objectForKey:@"title"];
     
     [self.navigationController pushViewController:pvc animated:YES];
     

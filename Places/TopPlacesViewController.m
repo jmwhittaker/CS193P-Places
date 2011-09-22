@@ -29,8 +29,10 @@
 
 
 - (id)initWithTabBar {
-    if ([self init]) {
-        
+    self = [super init];
+    if (self) {
+        self.tabBarItem = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemTopRated tag:0];
+        self.title = @"Places";
     }
     
     return self;
@@ -47,7 +49,6 @@
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
     
-    // Release any cached data, images, etc that aren't in use.
 }
 
 #pragma mark - View lifecycle
@@ -104,7 +105,6 @@
 {
 #warning Potentially incomplete method implementation.
     
-    //NSLog(@"%@", self.topPlaces);
     // Return the number of sections.
     return 1;
 }
@@ -182,28 +182,17 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    /*
-     NSSortDescriptor *sort = [[[NSSortDescriptor alloc] initWithKey:@"_content" ascending:YES] autorelease];
-     topPlaces = [[[FlickrFetcher topPlaces] sortedArrayUsingDescriptors:[NSArray arrayWithObject:sort]] retain];
-     */
-    
-    //NSSortDescriptor *sort = [[[NSSortDescriptor alloc] initWithKey:@"title" ascending:YES] autorelease];
     
     PhotosAtPlaceViewController* pvc = [[PhotosAtPlaceViewController alloc] init];
     pvc.photosAtLocationArray = [FlickrFetcher photosAtPlace:[[self.topPlaces objectAtIndex:indexPath.row] objectForKey:@"place_id"]];
+    
+    NSString* place = [[self.topPlaces objectAtIndex:indexPath.row] objectForKey:@"_content"];
+    NSRange range = [place rangeOfString:@","];
+    pvc.title = [place substringToIndex:range.location];
 
     [self.navigationController pushViewController:pvc animated:YES];
     [pvc release];
     
-    
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     [detailViewController release];
-     */
 }
 
 @end
